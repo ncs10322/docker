@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  webserver:
+    build: .
+    ports:
+      - "9001:80"
+    links:
+      - mysql:mysql
+    restart: always
+    volumes:
+      - ./html:/var/www/html/
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.5
+    environment:
+      MYSQL_ROOT_PASSWORD: 'db_root_password'
+      MYSQL_USER: 'db_id'
+      MYSQL_PASSWORD: 'db_password'
+      MYSQL_DATABASE: 'db_name'
+    volumes:
+      - ./data:/var/lib/mysql
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3306:3306"
+
+
