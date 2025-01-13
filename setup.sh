@@ -72,13 +72,13 @@ yum -y -q install epel-release && yum -y -q install git-core htop
 git clone https://github.com/ncs10322/docker.git
 
 printf "\n"
+echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+systemctl restart sshd
 sleep 3
 printf "======================================\n"
 printf "CentOS 기본 환경 구성이 완료되었습니다.\n"
 printf "======================================\n"
 printf "\n"
-echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
-systemctl restart sshd
 sleep 3
 cd
 printf "⑩  sestatus 를 실시하여 SElinux 모드가 permissive 로 변경되었는지 확인하세요.\n"
